@@ -1,0 +1,599 @@
+SQL*Plus: Release 11.2.0.1.0 Production on Wed Jul 18 09:06:26 2018
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: scott
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+BONUS                          TABLE
+DEPT                           TABLE
+EMP                            TABLE
+SALGRADE                       TABLE
+
+
+
+SQL>
+SQL> create table PERSONS(LASTNAME VARCHAR(20), FIRSTNAME CHAR(20),ADDRESS CHAR(20),CITY CHAR(20));
+
+Table created.
+
+SQL> DESCRIBE PERSONS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ LASTNAME                                           VARCHAR2(20)
+ FIRSTNAME                                          CHAR(20)
+ ADDRESS                                            CHAR(20)
+ CITY                                               CHAR(20)
+
+SQL> SELECT * FROM PERSONS;
+
+no rows selected
+
+SQL> INERT INTO PERSONS VALUES('HANSON','OLA','WHITEFIELD','BENGALURU');
+SP2-0734: unknown command beginning "INERT INTO..." - rest of line ignored.
+SQL> INSERT INTO PERSONS VALUES('MATHEW','ANU','PALA','KOTTAYAM');
+
+1 row created.
+
+SQL> INSERT INTO PERSONS VALUES('JOSEPH','AAGA','SKMANGLAM','KOTTAYAM');
+
+1 row created.
+
+SQL> INSERT INTO PERSONS VALUES('JOSEPH','LIYAA','RN NAGR','EKM');
+
+1 row created.
+
+SQL> INSERT INTO PERSONS VALUES('GEORGE','RIYA','AB NAGR','BENGALURU');
+
+1 row created.
+
+SQL> INSERT INTO PERSONS VALUES('ELIZABETH','MIA','KG NAGR','BENGALURU');
+
+1 row created.
+
+SQL> SELECT * FROM PERSONS;
+
+LASTNAME             FIRSTNAME            ADDRESS
+-------------------- -------------------- --------------------
+CITY
+--------------------
+MATHEW               ANU                  PALA
+KOTTAYAM
+
+JOSEPH               AAGA                 SKMANGLAM
+KOTTAYAM
+
+JOSEPH               LIYAA                RN NAGR
+EKM
+
+
+LASTNAME             FIRSTNAME            ADDRESS
+-------------------- -------------------- --------------------
+CITY
+--------------------
+GEORGE               RIYA                 AB NAGR
+BENGALURU
+
+ELIZABETH            MIA                  KG NAGR
+BENGALURU
+
+
+SQL> SELECT FIRSTNAME FROM PERSONS;
+
+FIRSTNAME
+--------------------
+ANU
+AAGA
+LIYAA
+RIYA
+MIA
+
+
+
+SQL> INSERT INTO PERSONS VALUES('JOHN','MIA','LB NAGAR','EKM');
+
+1 row created.
+
+
+
+SQL> SELECT * FROM PERSONS WHERE CITY='KOTTAYAM';
+
+LASTNAME             FIRSTNAME            ADDRESS
+-------------------- -------------------- --------------------
+CITY
+--------------------
+MATHEW               ANU                  PALA
+KOTTAYAM
+
+JOSEPH               AAGA                 SKMANGLAM
+KOTTAYAM
+
+
+SQL> SELECT FIRSTNAME LASTNAME FROM PERSONS WHERE CITY='KOTTAYAM';
+
+LASTNAME
+--------------------
+ANU
+AAGA
+
+SQL> SELECT FIRSTNAME, LASTNAME FROM PERSONS WHERE CITY='KOTTAYAM';
+
+FIRSTNAME            LASTNAME
+-------------------- --------------------
+ANU                  MATHEW
+AAGA                 JOSEPH
+
+SQL> SELECT FIRSTNAME, LASTNAME FROM PERSONS WHERE CITY!='KOTTAYAM';
+
+FIRSTNAME            LASTNAME
+-------------------- --------------------
+LIYAA                JOSEPH
+RIYA                 GEORGE
+MIA                  ELIZABETH
+MIA                  JOHN
+
+SQL> SELECT * FROM PERSONS WHERE FIRSTNAME='MIA';
+
+LASTNAME             FIRSTNAME            ADDRESS
+-------------------- -------------------- --------------------
+CITY
+--------------------
+ELIZABETH            MIA                  KG NAGR
+BENGALURU
+
+JOHN                 MIA                  LB NAGAR
+EKM
+
+
+SQL> SELECT FIRSTNAME FROM PERSONS WHERE FIRSTNAME LIKE 'M%';
+
+FIRSTNAME
+--------------------
+MIA
+MIA
+
+
+
+SQL> INSERT INTO PERSONS(LASTNAME, FIRSTNAME) VALUES ('GATES', 'GURU');
+
+1 row created.
+
+SQL> UPDATE PERSONS SET CITY='MUMBAI' WHERE FIRSTNAME='RIYA';
+
+1 row updated.
+
+SQL> SELECT * FROM PERSONS;
+
+LASTNAME             FIRSTNAME            ADDRESS
+-------------------- -------------------- --------------------
+CITY
+--------------------
+MATHEW               ANU                  PALA
+KOTTAYAM
+
+JOSEPH               AAGA                 SKMANGLAM
+KOTTAYAM
+
+JOSEPH               LIYAA                RN NAGR
+EKM
+
+
+LASTNAME             FIRSTNAME            ADDRESS
+-------------------- -------------------- --------------------
+CITY
+--------------------
+GEORGE               RIYA                 AB NAGR
+MUMBAI
+
+ELIZABETH            MIA                  KG NAGR
+BENGALURU
+
+JOHN                 MIA                  LB NAGAR
+EKM
+
+
+LASTNAME             FIRSTNAME            ADDRESS
+-------------------- -------------------- --------------------
+CITY
+--------------------
+GATES                GURU
+
+
+
+7 rows selected.
+
+SQL> scott
+SP2-0042: unknown command "scott" - rest of line ignored.
+SQL> SELECT ABS(-10) FROM DUAL;
+
+  ABS(-10)
+----------
+        10
+
+SQL> SELECT CEIL(12) FROM DUAL;
+
+  CEIL(12)
+----------
+        12
+
+SQL> SELECT CEIL(12.67) FROM DUAL;
+
+CEIL(12.67)
+-----------
+         13
+
+SQL> SELECT FLOOR (13.67) FROM DUAL;
+
+FLOOR(13.67)
+------------
+          13
+
+SQL> SELECT TRUNC (5,30) FROM DUAL;
+
+TRUNC(5,30)
+-----------
+          5
+
+SQL> SELECT ROUND (12.1,18) FROM DUAL;
+
+ROUND(12.1,18)
+--------------
+          12.1
+
+SQL> SELECT TRUNC (12.1,18) FROM DUAL;
+
+TRUNC(12.1,18)
+--------------
+          12.1
+
+SQL> SELECT  LOWER(FIRSTNAME) FROM DUAL;
+SELECT  LOWER(FIRSTNAME) FROM DUAL
+              *
+ERROR at line 1:
+ORA-00904: "FIRSTNAME": invalid identifier
+
+
+SQL> SELECT * FROM PERSONS;
+
+LASTNAME             FIRSTNAME            ADDRESS
+-------------------- -------------------- --------------------
+CITY
+--------------------
+MATHEW               ANU                  PALA
+KOTTAYAM
+
+JOSEPH               AAGA                 SKMANGLAM
+KOTTAYAM
+
+JOSEPH               LIYAA                RN NAGR
+EKM
+
+
+LASTNAME             FIRSTNAME            ADDRESS
+-------------------- -------------------- --------------------
+CITY
+--------------------
+GEORGE               RIYA                 AB NAGR
+MUMBAI
+
+ELIZABETH            MIA                  KG NAGR
+BENGALURU
+
+JOHN                 MIA                  LB NAGAR
+EKM
+
+
+LASTNAME             FIRSTNAME            ADDRESS
+-------------------- -------------------- --------------------
+CITY
+--------------------
+GATES                GURU
+
+
+
+7 rows selected.
+
+SQL> SELECT SUBSTR(FIRSTNAME, 2,4) FROM PERSONS;
+
+SUBS
+----
+NU
+AGA
+IYAA
+IYA
+IA
+IA
+URU
+
+7 rows selected.
+
+
+SQL> SELECT LENGTH(CITY) FROM PERSONS;
+
+LENGTH(CITY)
+------------
+          20
+          20
+          20
+          20
+          20
+          20
+
+
+7 rows selected.
+
+
+SQL> SELECT CURDATE() FROM SYSDATE;SELECT EXTRACT YEAR
+  2
+
+
+SQL> SELECT COUNT(*) FROM PERSONS GROUP BY CITY;
+
+  COUNT(*)
+----------
+         1
+         1
+         2
+         2
+         1
+
+SQL> SELECT CITY,COUNT(*) FROM PERSONS GROUP BY CITY;
+
+CITY                   COUNT(*)
+-------------------- ----------
+BENGALURU                     1
+                              1
+EKM                           2
+KOTTAYAM                      2
+MUMBAI                        1
+
+
+
+
+
+SQL> CREATE TABLE EMPLOYEE(NAME CHAR(20),SALARY NUMBER(10,2), DEPT CHAR(10));
+
+Table created.
+
+
+
+SQL> INSERT INTO EMPLOYEE VALUES('ANU',10000,'PRDN');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES('JIYA',12000,'ADVRTSNG');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES('RITA',23000,'SALES');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES('ARCHA',41000,'FINANCE');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES('LINDA',15400,'FINANCE');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES('LIYA',20000,'ADVERTSNG');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES('NIA',25000,'SALES');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES('ROSE',32000,'PRDN');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES('JENNI',12000,'PRDN');
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES('CIA',30000,'FINANCE');
+
+1 row created.
+
+
+
+
+SQL> SELECT DEPT, COUNT(*) FROM EMPLOYEE GROUP BY DEPT;
+
+DEPT         COUNT(*)
+---------- ----------
+SALES               2
+ADVRTSNG            1
+PRDN                3
+ADVERTSNG           1
+FINANCE             3
+
+SQL> SELECT DEPT, SUM(SALARY) FROM EMPLOYEE GROUP BY DEPT;
+
+DEPT       SUM(SALARY)
+---------- -----------
+SALES            48000
+ADVRTSNG         12000
+PRDN             54000
+ADVERTSNG        20000
+FINANCE          86400
+
+
+
+SQL> SELECT DEPT, SUM(SALARY) FROM EMPLOYEE GROUP BY DEPT HAVING DEPT= 'SALES';
+
+DEPT       SUM(SALARY)
+---------- -----------
+SALES            48000
+
+
+
+SQL> SELECT DEPT, AVG(SALARY) FROM EMPLOYEE GROUP BY DEPT HAVING DEPT='SALES';
+
+DEPT       AVG(SALARY)
+---------- -----------
+SALES            24000
+
+
+
+SQL> SELECT AVG(SALARY) FROM EMPLOYEE WHERE DEPT='SALES';
+
+AVG(SALARY)
+-----------
+      24000
+
+
+
+SQL> SELECT NAME FROM EMPLOYEE WHERE SALARY=(SELECT SALARY FROM EMPLOYEE WHERE NAME='JIYA');
+
+NAME
+--------------------
+JIYA
+JENNI
+
+
+
+
+SQL> SELECT NAME FROM EMPLOYEE WHERE SALARY =(SELECT MAX(SALARY)FROM EMPLOYEE WHERE DEPT='FINANCE');
+
+NAME
+--------------------
+ARCHA
+
+
+
+
+SQL> SELECT * FROM EMPLOYEE ORDER BY NAME;
+
+NAME                     SALARY DEPT
+-------------------- ---------- ----------
+ANU                       10000 PRDN
+ARCHA                     41000 FINANCE
+CIA                       30000 FINANCE
+JENNI                     12000 PRDN
+JIYA                      12000 ADVRTSNG
+LINDA                     15400 FINANCE
+LIYA                      20000 ADVERTSNG
+NIA                       25000 SALES
+RITA                      23000 SALES
+ROSE                      32000 PRDN
+
+10 rows selected.
+
+SQL> SELECT * FROM EMPLOYEE ORDER BY NAME DESC;
+
+NAME                     SALARY DEPT
+-------------------- ---------- ----------
+ROSE                      32000 PRDN
+RITA                      23000 SALES
+NIA                       25000 SALES
+LIYA                      20000 ADVERTSNG
+LINDA                     15400 FINANCE
+JIYA                      12000 ADVRTSNG
+JENNI                     12000 PRDN
+CIA                       30000 FINANCE
+ARCHA                     41000 FINANCE
+ANU                       10000 PRDN
+
+10 rows selected.
+
+.
+SQL> CREATE TABLE SAILERS(SID NUMBER(5,2),SNAME CHAR(20));
+
+Table created.
+
+
+SQL> INSERT INTO SAILERS VALUES(11,'AAA');
+
+1 row created.
+
+SQL> INSERT INTO SAILERS VALUES(12,'WWW');
+
+1 row created.
+
+SQL> INSERT INTO SAILERS VALUES(13,'GGG');
+
+1 row created.
+
+SQL> INSERT INTO SAILERS VALUES(14,'HHH');
+
+1 row created.
+
+SQL> INSERT INTO SAILERS VALUES(15,'FFF');
+
+1 row created.
+
+SQL> INSERT INTO SAILERS VALUES(16,'III');
+
+1 row created.
+
+SQL> CREATE TABLE RESERVE(SID NUMBER);
+
+Table created.
+
+SQL> INSERT INTO RESERVE VALUES(13);
+
+1 row created.
+
+SQL> INSERT INTO RESERVE VALUES(16);
+
+1 row created.
+
+SQL> INSERT INTO RESERVE VALUES(12);
+
+1 row created.
+
+SQL> COMMIT
+  2
+SQL> COMMIT;
+
+Commit complete.
+
+SQL>  SELECT S.SNAME FROM SAILERS S WHERE S.SID IN (SELECT R.SID FROM RESERVE R WHERE R.SID=13);
+
+SNAME
+--------------------
+GGG
+
+SQL> ALTER TABLE RESERVE ADD BID NUMBER;
+
+Table altered.
+
+SQL> UPDATE RESERVE SET BID=14 WHERE SID=13;
+
+1 row updated.
+
+SQL>  SELECT S.SNAME FROM SAILERS S WHERE S.SID IN (SELECT R.SID FROM RESERVE R WHERE R.BID=13);
+
+no rows selected
+
+SQL>  SELECT S.SNAME FROM SAILERS S WHERE S.SID IN (SELECT R.SID FROM RESERVE R WHERE R.BID=14);
+
+SNAME
+--------------------
+GGG
+
+SQL>
+SQL> COMMIT;
+
+Commit complete.
+
+SQL>
+...............................................................................................
+
+
+
+
+
+
+
